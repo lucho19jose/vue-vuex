@@ -33,8 +33,7 @@ export default {
   },
   computed: {
     foo() {},
-    ...mapState(['username']),
-    ...mapGetters(['firstName'])
+    ...mapGetters('profile', ['firstName']),
   }
 
 }

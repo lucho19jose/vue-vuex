@@ -2,10 +2,13 @@
 import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   computed: {
-    ...mapState(['username']),
+    ...mapState({
+      username: (state) => state.profile.username,
+      usernamechat: (state) => state.chat.username
+    }),
   },
   methods: {
-    ...mapActions(['updateUsername'])
+    ...mapActions('profile',['updateUsername'])
   }
 }
 </script>
