@@ -1,11 +1,11 @@
-import { COMMIT_UPDATE_USERNAME } from '@/common/mutation-types.js'
+import { COMMIT_SET_STATUS ,COMMIT_UPDATE_USERNAME } from '@/common/mutation-types.js'
 import { getUser } from '@/api'
 
 const module = {
   namespaced: true,
   state() {
     return {
-      username: 'joseluisb.cloudModule'
+      username: ''
     }
   },
   getters: {
@@ -20,12 +20,16 @@ const module = {
     }
   },
   actions: {
-    async updateUsername({ commit }, username) {
+    async updateUsername({ commit, state, rootState }, username) {
       /* console.log('updateusername action', username);
       commit('updateUsername', username) */
       const user = await getUser(1);
       console.log(user)
+      console.log('status', rootState.status)
       commit(COMMIT_UPDATE_USERNAME, user.username)
+      if(state.username) {
+        commit(COMMIT_SET_STATUS, 'active', { root: true })
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 <script>
 import MessageItem from '@/components/MessageItem.vue'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -29,8 +30,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('messages', ['getMessages']),
     messagesView() {
-      return this.messages.map((message) => {
+      return this.getMessages?.map((message) => {
         const author = this.people.find((p) => p.id === message.author)
         if (!author) return message;
         return {

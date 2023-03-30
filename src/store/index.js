@@ -1,10 +1,14 @@
 import { createStore } from 'vuex'
 import profile from '@/store/modules/profile';
-import chat from '@/store/modules/chat';
+import channels from '@/store/modules/channels';
+import messages from '@/store/modules/messages';
+import { COMMIT_SET_STATUS } from '@/common/mutation-types';
 
 const store = createStore({
   state() {
-    return {};
+    return {
+      status: null
+    };
   },
   getters: {
     /* firstName: (state, getters, rootState) => (c) => {
@@ -12,14 +16,18 @@ const store = createStore({
     } */
   },
   mutations:{
-
+    [COMMIT_SET_STATUS](state, payload) {
+      console.log("payload", payload);
+      state.status = payload;
+    }
   },
   actions: {
 
   },
   modules: {
     profile,
-    chat
+    channels,
+    messages
   }
 })
 
