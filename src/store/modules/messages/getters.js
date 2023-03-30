@@ -1,6 +1,6 @@
 const getters = {
-  getMessages: (state) => {
-    return  state.messages;
+  getMessages: (state) => (channelId) =>{
+    return  state.messages.filter((message) => message.channelId === parseInt(channelId));
   }
 }
 

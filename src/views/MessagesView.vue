@@ -8,6 +8,7 @@ export default {
   },
   data() {
     return {
+      channelId: null,
       title: 'Nombre del canal',
       people: [
         { id: 1, name: 'Tú', avatar: '/avatars/avatar.jpg' },
@@ -32,7 +33,7 @@ export default {
   computed: {
     ...mapGetters('messages', ['getMessages']),
     messagesView() {
-      return this.getMessages?.map((message) => {
+      return this.getMessages(this.channelId)?.map((message) => {
         const author = this.people.find((p) => p.id === message.author)
         if (!author) return message;
         return {
@@ -46,7 +47,8 @@ export default {
   watch: {
     '$route.params.id': {
       immediate: true,
-      handler() {
+      handler(id) {
+        this.channelId = id;
         this.scrollToBottom()
       }
     }
